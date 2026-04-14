@@ -1,8 +1,12 @@
 <?php
-$servername = $_ENV['mysql.railway.internal'];
-$username   = $_ENV['root'];
-$password   = $_ENV['tFtgMquFNgZifOPLasFsSRxfFAHtCfyS'];
-$dbname     = $_ENV['railway'];
+$servername = getenv('mysql.railway.internal');
+$username   = getenv('root');
+$password   = getenv('tFtgMquFNgZifOPLasFsSRxfFAHtCfyS');
+$dbname     = getenv('railway');
+
+if (!$servername || !$username || !$password || !$dbname) {
+    die("Missing environment variables");
+}
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
