@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap');
+
+/* =========================
+   BASE LAYOUT + BACKGROUND
+   ========================= */
+body {
+    background-image: url('EggBG.jpg'); /* same as homepage */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* =========================
+   HEADER + FOOTER COMPATIBILITY
+   ========================= */
+.main-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, #fff5cc, #fff9e6);
+    padding: 18px 60px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid #ffe79a;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 1.9rem;
+    font-weight: bold;
+    color: #ffb703;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-links span {
+    font-weight: 600;
+    color: #3b2f14;
+}
+
+.nav-links .btn {
+    text-decoration: none;
+    color: #3b2f14;
+    font-weight: 500;
+    border: 1px solid #ffe79a;
+    padding: 7px 14px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    background: #fffdf7;
+}
+
+.nav-links .btn:hover {
+    background: #ffd76a;
+    color: #3b2f14;
+    border-color: #ffd76a;
+}
+
+/* =========================
+   REGISTER BOX DESIGN
+   ========================= */
+.register-main {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+.register-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    width: 350px;
+    text-align: center;
+}
+
+.register-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* =========================
+   FORM ELEMENTS
+   ========================= */
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #444;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #ffb703;
+    box-shadow: 0 0 5px #ffd76a;
+}
+
+/* =========================
+   BUTTON STYLES
+   ========================= */
+.btn-register {
+    width: 100%;
+    background-color: #ffb703;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn-register:hover {
+    background-color: #f77f00;
+    transform: translateY(-2px);
+}
+
+/* =========================
+   MESSAGE BOXES
+   ========================= */
+.success-box, .error-box {
+    background-color: #fffefb;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    border-left: 4px solid transparent;
+}
+
+.success-box {
+    border-left-color: #4CAF50;
+    color: #2e7d32;
+}
+
+.error-box {
+    border-left-color: #f44336;
+    color: #b71c1c;
+}
+
+/* =========================
+   LINKS
+   ========================= */
+.login-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: #ffb703;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   FOOTER (MATCH INDEX.PHP)
+   ========================= */
+.main-footer {
+    text-align: center;
+    padding: 25px 0;
+    background: linear-gradient(90deg, #fff9e6, #fff5cc);
+    border-top: 1px solid #ffe79a;
+    box-shadow: 0 -2px 6px rgba(255, 183, 3, 0.1);
+    width: 100%;
+    margin-top: auto;
+}
+
+.footer-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.footer-btn {
+    text-decoration: none;
+    background: #ffb703;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.footer-btn:hover {
+    background: #f77f00;
+    transform: translateY(-2px);
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+   ========================= */
+@media (max-width: 500px) {
+    .main-header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 20px;
+    }
+
+    .register-container {
+        width: 90%;
+        padding: 25px 20px;
+    }
+
+    .footer-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
