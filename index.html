@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eggcipe | Home</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+<header class="header">
+    <a href="index.html" class="logo">🥚 Eggcipe</a>
+
+    <div class="user-section">
+        <a href="login.html" class="login-btn">Login</a>
+        <a href="register.html" class="account-btn">Register</a>
+    </div>
+</header>
+
+<main class="main-content">
+    <h2 class="section-title">🍳 Explore Egg Recipes</h2>
+
+    <div class="search-container">
+        <input type="text" id="recipeSearch" class="search-input"
+               placeholder="Search recipes by name or description...">
+
+        <div class="suggest-inline">
+            <button class="suggest-link" id="openSuggestStatic" type="button">
+                Suggest a recipe
+            </button>
+        </div>
+    </div>
+
+    <div id="noResults" class="no-results" style="display:none;">
+        <p>Can't find the recipe you're looking for?</p>
+        <button class="suggest-btn" id="openSuggest">Suggest a recipe</button>
+    </div>
+
+    <!-- STATIC CAROUSEL (no database) -->
+    <div class="carousel-container">
+        <button class="nav-arrow left" onclick="scrollCarousel(-1)">&#10094;</button>
+
+        <div class="carousel" id="carousel">
+
+            <!-- SAMPLE CARDS (replace with your real content manually) -->
+            <div class="recipe-card">
+                <img src="https://via.placeholder.com/300x200" alt="Recipe">
+                <h3>Scrambled Eggs</h3>
+                <p>Soft and creamy scrambled eggs.</p>
+                <a href="recipe.detail.html" class="view-btn">View Recipe</a>
+            </div>
+
+            <div class="recipe-card">
+                <img src="https://via.placeholder.com/300x200" alt="Recipe">
+                <h3>Omelette</h3>
+                <p>Classic fluffy omelette.</p>
+                <a href="recipe.detail.html" class="view-btn">View Recipe</a>
+            </div>
+
+            <div class="recipe-card">
+                <img src="https://via.placeholder.com/300x200" alt="Recipe">
+                <h3>Boiled Eggs</h3>
+                <p>Perfect soft and hard boiled eggs.</p>
+                <a href="recipe.detail.html" class="view-btn">View Recipe</a>
+            </div>
+
+        </div>
+
+        <button class="nav-arrow right" onclick="scrollCarousel(1)">&#10095;</button>
+    </div>
+
+    <div class="dots" id="dots"></div>
+</main>
+
+<!-- STATIC TOP RECIPE -->
+<aside class="rotw-sidebar">
+    <div class="rotw-card">
+        <h3>🥇 Top Recipe</h3>
+
+        <img src="https://via.placeholder.com/300x200" alt="Top Recipe">
+        <h4>Golden Egg Toast</h4>
+        <p>Simple and delicious egg toast recipe.</p>
+
+        <a class="view-btn" href="#">View Recipe</a>
+    </div>
+
+    <div class="rotw-shadow"></div>
+</aside>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-buttons">
+        <a href="#" class="footer-btn">Suggestions & Feedback</a>
+        <a href="#" class="footer-btn">Report a Problem</a>
+        <a href="#" class="footer-btn">Contact Us</a>
+    </div>
+</footer>
+
+<!-- JAVASCRIPT (unchanged logic but no PHP dependency) -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const carousel = document.getElementById('carousel');
+    const dotsContainer = document.getElementById('dots');
+    const allCards = Array.from(document.querySelectorAll('.recipe-card'));
+
+    let currentIndex = 0;
+    const cardWidth = 320;
+    const visibleCardsPerView = 3;
+
+    function getVisibleCards() {
+        return allCards.filter(card => card.style.display !== 'none');
+    }
+
+    function scrollCarousel(direction) {
+        const visible = getVisibleCards();
+        const maxIndex = Math.max(0, Math.ceil(visible.length / visibleCardsPerView) - 1);
+
+        currentIndex += direction;
+        if (currentIndex < 0) currentIndex = 0;
+        if (currentIndex > maxIndex) currentIndex = maxIndex;
+
+        carousel.scrollTo({
+            left: currentIndex * (cardWidth * visibleCardsPerView),
+            behavior: 'smooth'
+        });
+
+        updateDots();
+    }
+
+    window.scrollCarousel = scrollCarousel;
+
+    function updateDots() {
+        dotsContainer.innerHTML = '';
+        const total = Math.max(1, Math.ceil(getVisibleCards().length / visibleCardsPerView));
+
+        for (let i = 0; i < total; i++) {
+            const dot = document.createElement('span');
+            dot.className = 'dot' + (i === currentIndex ? ' active' : '');
+
+            dot.addEventListener('click', () => {
+                currentIndex = i;
+                scrollCarousel(0);
+            });
+
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    updateDots();
+
+    // SEARCH FILTER
+    const searchInput = document.getElementById('recipeSearch');
+    const noResults = document.getElementById('noResults');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const term = this.value.toLowerCase().trim();
+
+            allCards.forEach(card => {
+                const name = card.querySelector('h3')?.textContent.toLowerCase() || '';
+                const info = card.querySelector('p')?.textContent.toLowerCase() || '';
+
+                const match = !term || name.includes(term) || info.includes(term);
+                card.style.display = match ? '' : 'none';
+            });
+
+            currentIndex = 0;
+            carousel.scrollLeft = 0;
+            updateDots();
+
+            const visibleCount = getVisibleCards().length;
+            if (noResults) noResults.style.display = (visibleCount === 0 ? '' : 'none');
+        });
+    }
+
+});
+</script>
+
+</body>
+</html>
