@@ -1,8 +1,11 @@
 <?php
-$servername = "localhost"; 
-$username = "root";        
-$password = "";           
-$dbname = "eggcipe";
+$conn = new mysqli(
+  $_ENV['mysql.railway.internal'],
+  $_ENV['root'],
+  $_ENV['tFtgMquFNgZifOPLasFsSRxfFAHtCfyS'],
+  $_ENV['railway']
+);
+
 
 // ✅ Create only one connection (the one login.php uses)
 $conn = new mysqli($servername, $username, $password, $dbname);
